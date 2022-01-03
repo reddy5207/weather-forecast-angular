@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+fieldset {
+  border: 1px solid #1a1a1a;
+  position: relative;
+  border-radius: 4px;
+
+  legend {
+    position: absolute;
+    background-color: #fff;
+    font-size: 16px;
+    left: 10px;
+    width: auto;
+    top: -12px;
+    padding: 0 10px;
+  }
+}
+
+.success-snackbar {
+  background: #1ed35a;
+  color: #ffff;
+}
+
+.error-snackbar {
+  background: #ec1919;
+  color: #ffff;
+}
+
+.success-snackbar .mat-simple-snackbar-action {
+  color: #ffff;
+}
+
+
+.error-snackbar .mat-simple-snackbar-action {
+  color: #ffff;
+}
+
+.mt-4 {
+  margin-top: 1.5em;
+}

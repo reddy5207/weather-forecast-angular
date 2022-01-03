@@ -1,0 +1,24 @@
+  <div fxLayoutAlign="center center">
+    <mat-card fxLayout="column" fxFlex="60" fxLayoutGap="1em" class="mt-4">
+      <fieldset fxFlex="1 1 75">
+        <legend><b>{{forecastData?.city?.name}} ({{zipCodeValue}})</b></legend>
+        <div fxLayout="column" fxLayoutGap="2px" fxFlex="1 1 100" *ngIf="forecastData && forecastData.list.length > 0">
+          <div fxFLayout="column" *ngFor="let data of forecastData.list; let i=index">
+            <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="i !== 0 && i < 6">
+              <span> {{data.dt_txt | date: 'EEEE, MMM d'}}:
+                {{data.weather[0].main}}
+                - Min: {{(data.temp.min-273.15)| number : '1.0-0'}}℃
+                - Max: {{(data.temp.max-273.15)| number : '1.0-0'}}℃ </span>
+              <img class="icon" *ngIf="data.weather[0].main !=='Clear'"
+                src="https://www.angulartraining.com/images/weather/{{data.weather[0].main | lowercase}}.png">
+              <img class="icon" *ngIf="data.weather[0].main ==='Clear'"
+                src="https://www.angulartraining.com/images/weather/sun.png">
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <div fxLayoutAlign="end center" fxFlexFill>
+        <button mat-raised-button tabindex="0" color="primary" [routerLink]="['/']">Back</button>
+      </div>
+    </mat-card>
+  </div>

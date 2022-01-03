@@ -1,0 +1,62 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header fxLayoutAlign="center center">
+      <mat-card-title>Weather Application</mat-card-title>
+    </mat-card-header>
+    <div  fxLayout="column" fxLayoutGap="1em">
+      <fieldset>
+        <legend>Add Location:</legend>
+        <div class="mt-4" fxLayout="row" fxFlexOffset="20%" fxLayoutGap="2em" (keyup.enter)="getPresentWeatherZipCode(zipCode)">
+          <div fxLayout="column">
+            <mat-label>Enter a Zipcode</mat-label>
+            <mat-form-field appearance="outline" fxFlexFill fxFlex=60>
+              <input matInput type="number" placeholder="Enter zip code" [(ngModel)]="zipCode" id="addLocation">
+            </mat-form-field>
+          </div>
+          <div fxFlex fxLayoutAlign="center center">
+            <button mat-raised-button color="primary" id="addLocationBtn"
+              (click)="getPresentWeatherZipCode(zipCode)" >Add
+              Location</button>
+          </div>
+        </div>
+      </fieldset>
+      <div fxLayout="row wrap" fxLayoutGap="1% grid">
+        <div fxFlex="1 1 50%" *ngFor="let location of presentWeatherData; let i = index">
+          <fieldset>
+            <legend><b>{{ location.name }} - {{ location.zipcode }}</b></legend>
+            <div fxLayout="row" class="mt-4">
+              <div fxLayout="column" fxLayoutGap="20px" fxFlexFill fxFlex="70">
+                <h4>Current Conditions: <span class="text-success"><b>{{ location.weather[0].main }}</b></span>
+                </h4>
+                <h4>Temperature today: <b> {{ location.main.temp - 273.15 | number: "1.0-0" }}℃ </b></h4>
+                <h4>
+                  Max today: <b> {{ location.main.temp_max - 273.15 | number: "1.0-0" }}℃</b> -
+                  Min today: <b> {{ location.main.temp_min - 273.15 | number: "1.0-0" }}℃</b>
+                </h4>
+              </div>
+              <div fxLayoutGap="5em" fxFlex fxLayoutAlign="center center">
+                <img class="weather-img"
+                  *ngIf="location.weather[0].main != 'Clear' && location.weather[0].main != 'Haze'" src="https://www.angulartraining.com/images/weather/{{
+                                        location.weather[0].main | lowercase
+                                      }}.png" />
+                <img class="weather-img" *ngIf="location.weather[0].main === 'Haze'"
+                  src="https://www.angulartraining.com/images/weather/snow.png" />
+
+                <img class="weather-img" *ngIf="location.weather[0].main === 'Clear'"
+                  src="https://www.angulartraining.com/images/weather/sun.png" />
+
+                <span class="close h4" (click)="removeWeatherDetails(location.zipcode)" title="Remove">×</span>
+              </div>
+
+            </div>
+            <div class="mt-4">
+              <a [routerLink]="['/forecast', location.zipcode]" routerLinkActive="router-link-active"><b>Show
+                  5-day forecast for {{ location.name }}</b></a>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+</div>
